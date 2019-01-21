@@ -1,0 +1,11 @@
+---
+id: usercontroller
+name: UserController
+description: The controller that manage user info
+similar:
+- id: articlecontroller
+  name: ArticleController
+  description: The controller that manage article info
+- id: accountcontroller
+  name: AccountController
+  description: The controller that manage account info

@@ -1,0 +1,13 @@
+.bar {
+    fill: #4c8efc;
+}
+
+.bar:hover {
+    fill: #2569da;
+}
+
+.axis-title {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.5px;
+}

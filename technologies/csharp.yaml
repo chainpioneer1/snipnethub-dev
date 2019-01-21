@@ -1,0 +1,8 @@
+id: csharp
+name: C#
+description: Windows development language
+books:
+- title: C# tutorial
+  storeUrl: https://www.tutorialspoint.com/csharp
+- title: C# doc
+  storeUrl: https://www.learncs.org

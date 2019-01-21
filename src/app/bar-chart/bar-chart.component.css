@@ -1,0 +1,41 @@
+.bar {
+    fill: #4c8efc;
+    margin-bottom: 20px;
+}
+
+.bar:hover {
+    fill: #2569da;
+}
+
+.axis-title {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.5px;
+}
+
+.toolTip {
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #111111;
+    padding: 14px;
+    text-align: center;
+
+    -webkit-box-shadow: 1px 2px 3px 4px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    1px 2px 3px 4px #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         0px 1px 1px 0px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  }
+
+  .axis--y .tick text{
+      font-size:16px;
+      color: gray
+  }
+
+  .bar1{
+      background-color: #4c8efc;
+  }
+  .bar1:hover{
+      background-color: #2569da;
+  }

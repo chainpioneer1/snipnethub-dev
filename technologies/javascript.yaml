@@ -1,0 +1,8 @@
+id: javascript
+name: javascript
+description: web development language
+books:
+- title: w3school
+  storeUrl: https://www.w3schools.com
+- title: javascript tutorial
+  storeUrl: https://www.tutorialspoint.com/javascript

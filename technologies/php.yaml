@@ -1,0 +1,8 @@
+id: php
+name: php
+description: Server side web development language
+books:
+- title: php tutorial
+  storeUrl: https://www.tutorialspoint.com/php
+- title: php wiki
+  storeUrl: https://en.wikipedia.org/wiki/PHP

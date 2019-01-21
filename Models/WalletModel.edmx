@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="send_address" Type="nvarchar" MaxLength="100" />
+          <Property Name="profit" Type="nvarchar" MaxLength="50" />
+          <Property Name="fee" Type="nvarchar" MaxLength="50" />
+          <Property Name="net_profit" Type="nvarchar" MaxLength="50" />
+          <Property Name="total_profit" Type="nvarchar" MaxLength="50" />
+          <Property Name="total_fee" Type="nvarchar" MaxLength="50" />
+          <Property Name="total_net_profit" Type="nvarchar" MaxLength="50" />
+          <Property Name="contract_time" Type="datetime" />
+          <Property Name="last_paid_time" Type="datetime" />
+          <Property Name="btc_amount" Type="nvarchar" MaxLength="30" />
+          <Property Name="usd_amount" Type="nvarchar" MaxLength="30" />
+          <Property Name="hashrate" Type="nvarchar" MaxLength="20" />
+          <Property Name="hashpower" Type="nvarchar" MaxLength="20" />
+          <Property Name="powercost" Type="nvarchar" MaxLength="20" />
+          <Property Name="hashalgo" Type="nvarchar" MaxLength="20" />
+          <Property Name="hashalgo_prefix" Type="nvarchar" MaxLength="20" />
+          <Property Name="contract_type" Type="nvarchar" MaxLength="10" />
+          <Property Name="isStarted" Type="nvarchar" MaxLength="10" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="isVerified" Type="nvarchar" MaxLength="1" />
+          <Property Name="isPurchased" Type="nvarchar" MaxLength="1" />
+          <Property Name="emailSecurity" Type="nvarchar" MaxLength="10" />
+          <Property Name="expired_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AspNetCurPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="price" Type="nvarchar" MaxLength="20" />
+          <Property Name="price_base" Type="nvarchar" MaxLength="20" />
+          <Property Name="exchange" Type="nvarchar" MaxLength="20" />
+          <Property Name="time_point" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetTransactionData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="txid" Type="nvarchar" MaxLength="250" />
+          <Property Name="time_point" Type="nvarchar" MaxLength="50" />
+          <Property Name="confirmations" Type="nvarchar" MaxLength="50" />
+          <Property Name="confidence" Type="nvarchar" MaxLength="50" />
+          <Property Name="senders" Type="nvarchar(max)" />
+          <Property Name="from_green_address" Type="bit" />
+          <Property Name="amounts_received" Type="nvarchar(max)" />
+          <Property Name="total_amount_sent" Type="nvarchar" MaxLength="50" />
+          <Property Name="amounts_sent" Type="nvarchar(max)" />
+          <Property Name="type" Type="nvarchar" MaxLength="10" />
+          <Property Name="propagated_by_nodes" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetWalletData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="100" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="label" Type="nvarchar" MaxLength="50" />
+          <Property Name="available_balance" Type="nvarchar" MaxLength="50" />
+          <Property Name="pending_received_balance" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_segwit" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_requested" Type="bit" />
+          <Property Name="message" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="hashpower_history">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="hash_amount" Type="nvarchar" MaxLength="50" />
+          <Property Name="usd_amount" Type="nvarchar" MaxLength="50" />
+          <Property Name="start_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="profit_history">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="profit" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="fee" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="algo" Type="nvarchar" MaxLength="50" />
+          <Property Name="purchase_date" Type="date" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetContract" EntityType="Self.AspNetContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetCurPrice" EntityType="Self.AspNetCurPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetTransactionData" EntityType="Self.AspNetTransactionData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetWalletData" EntityType="Self.AspNetWalletData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hashpower_history" EntityType="Self.hashpower_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="profit_history" EntityType="Self.profit_history" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetWalletData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="available_balance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pending_received_balance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_segwit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_requested" Type="Boolean" />
+          <Property Name="message" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="WalletEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="AspNetWalletDatas" EntityType="Self.AspNetWalletData" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="AspNetTransactionDatas" EntityType="Model.AspNetTransactionData" />
+          <EntitySet Name="AspNetCurPrices" EntityType="Model.AspNetCurPrice" />
+          <EntitySet Name="AspNetContracts" EntityType="Model.AspNetContract" />
+          <EntitySet Name="profit_history" EntityType="Model.profit_history" />
+          <EntitySet Name="hashpower_history" EntityType="Model.hashpower_history" />
+        </EntityContainer>
+        <EntityType Name="AspNetTransactionData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="txid" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="confirmations" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="confidence" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="senders" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="from_green_address" Type="Boolean" />
+          <Property Name="amounts_received" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="total_amount_sent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amounts_sent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="propagated_by_nodes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time_point" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetCurPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="price_base" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="exchange" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="time_point" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="send_address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="profit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="net_profit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contract_time" Type="DateTime" Precision="3" />
+          <Property Name="contract_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="isStarted" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="btc_amount" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="last_paid_time" Type="DateTime" Precision="3" />
+          <Property Name="isVerified" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="isPurchased" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="emailSecurity" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hashrate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="hashpower" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="powercost" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="usd_amount" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="total_profit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="total_fee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="total_net_profit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hashalgo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="hashalgo_prefix" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="expired_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="profit_history">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="profit" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="fee" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="algo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="purchase_date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="hashpower_history">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hash_amount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usd_amount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="WalletEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Model.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Model.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Model.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetWalletDatas">
+            <EntityTypeMapping TypeName="Model.AspNetWalletData">
+              <MappingFragment StoreEntitySet="AspNetWalletData">
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="is_requested" ColumnName="is_requested" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="available_balance" ColumnName="available_balance" />
+                <ScalarProperty Name="pending_received_balance" ColumnName="pending_received_balance" />
+                <ScalarProperty Name="is_segwit" ColumnName="is_segwit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="AspNetTransactionDatas">
+            <EntityTypeMapping TypeName="Model.AspNetTransactionData">
+              <MappingFragment StoreEntitySet="AspNetTransactionData">
+                <ScalarProperty Name="time_point" ColumnName="time_point" />
+                <ScalarProperty Name="propagated_by_nodes" ColumnName="propagated_by_nodes" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="amounts_sent" ColumnName="amounts_sent" />
+                <ScalarProperty Name="total_amount_sent" ColumnName="total_amount_sent" />
+                <ScalarProperty Name="amounts_received" ColumnName="amounts_received" />
+                <ScalarProperty Name="from_green_address" ColumnName="from_green_address" />
+                <ScalarProperty Name="senders" ColumnName="senders" />
+                <ScalarProperty Name="confidence" ColumnName="confidence" />
+                <ScalarProperty Name="confirmations" ColumnName="confirmations" />
+                <ScalarProperty Name="txid" ColumnName="txid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetCurPrices">
+            <EntityTypeMapping TypeName="Model.AspNetCurPrice">
+              <MappingFragment StoreEntitySet="AspNetCurPrice">
+                <ScalarProperty Name="time_point" ColumnName="time_point" />
+                <ScalarProperty Name="exchange" ColumnName="exchange" />
+                <ScalarProperty Name="price_base" ColumnName="price_base" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetContracts">
+            <EntityTypeMapping TypeName="Model.AspNetContract">
+              <MappingFragment StoreEntitySet="AspNetContract">
+                <ScalarProperty Name="expired_date" ColumnName="expired_date" />
+                <ScalarProperty Name="hashalgo_prefix" ColumnName="hashalgo_prefix" />
+                <ScalarProperty Name="hashalgo" ColumnName="hashalgo" />
+                <ScalarProperty Name="total_net_profit" ColumnName="total_net_profit" />
+                <ScalarProperty Name="total_fee" ColumnName="total_fee" />
+                <ScalarProperty Name="total_profit" ColumnName="total_profit" />
+                <ScalarProperty Name="usd_amount" ColumnName="usd_amount" />
+                <ScalarProperty Name="powercost" ColumnName="powercost" />
+                <ScalarProperty Name="hashpower" ColumnName="hashpower" />
+                <ScalarProperty Name="hashrate" ColumnName="hashrate" />
+                <ScalarProperty Name="emailSecurity" ColumnName="emailSecurity" />
+                <ScalarProperty Name="isPurchased" ColumnName="isPurchased" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="last_paid_time" ColumnName="last_paid_time" />
+                <ScalarProperty Name="btc_amount" ColumnName="btc_amount" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="isStarted" ColumnName="isStarted" />
+                <ScalarProperty Name="contract_type" ColumnName="contract_type" />
+                <ScalarProperty Name="contract_time" ColumnName="contract_time" />
+                <ScalarProperty Name="net_profit" ColumnName="net_profit" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="profit" ColumnName="profit" />
+                <ScalarProperty Name="send_address" ColumnName="send_address" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profit_history">
+            <EntityTypeMapping TypeName="Model.profit_history">
+              <MappingFragment StoreEntitySet="profit_history">
+                <ScalarProperty Name="purchase_date" ColumnName="purchase_date" />
+                <ScalarProperty Name="algo" ColumnName="algo" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="profit" ColumnName="profit" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hashpower_history">
+            <EntityTypeMapping TypeName="Model.hashpower_history">
+              <MappingFragment StoreEntitySet="hashpower_history">
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="usd_amount" ColumnName="usd_amount" />
+                <ScalarProperty Name="hash_amount" ColumnName="hash_amount" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

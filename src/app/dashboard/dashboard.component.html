@@ -1,0 +1,235 @@
+<app-navbar [isSearchShow]="false"></app-navbar>
+<div class="container-fluid table-condensed">
+    <div class="row">
+      <div class="col-md-6">
+          <h5 class="heading">Employee List </h5>  
+      </div>
+      <div class="col-md-6 search-block">
+       
+        <div style="margin-right: 7px;display: inline-block;position: relative;">
+          <b style="color: #acacac">From</b>
+          <i class="fa fa-calendar" style="position: relative; right: -30px;color: gray"></i>
+
+          <input class="form-control" #fDate bsDatepicker [(ngModel)]="fromDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+              style="padding-right: 22px;margin-left: calc(0.3vw);width:auto!important" (ngModelChange)="onDateChange()">
+              <i class="fa fa-angle-down" style="position: absolute;right: 17px;top: 21px;"></i>
+        </div>
+        <b style="color: #acacac">To</b>
+        <div style="display: inline-block;position: relative;">
+          
+          <i class="fa fa-calendar" style="position: relative; right: -30px;color: gray"></i>
+
+          <input class="form-control" #fDate bsDatepicker [(ngModel)]="toDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+              style="padding-right: 22px;margin-left: calc(0.3vw);width:auto!important" (ngModelChange)="onDateChange()">
+              <i class="fa fa-angle-down" style="position: absolute;right: 17px;top: 21px;"></i>
+        </div>
+
+      </div>
+    </div>
+    
+    <table class="table custom-table">
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Status</th>
+                <th>Incoming
+                    <br/>Calls</th>
+                <th>Outgoing
+                    <br/>Calls</th>
+                <th>Missed
+                    <br/>Calls</th>
+                <th>Percentage of
+                    <br/>Missed Calls</th>
+                <th>Cumulative
+                    <br/>Incoming Call
+                    <br/>Duration
+                </th>
+                <th>Cumulative
+                    <br/>Outgoing Call
+                    <br/>Duration
+                <th>New
+                    <br/>Calls</th>
+                <th>Percentage of
+                    <br/>New Calls</th>
+                <th>Average
+                    <br>Incoming Call
+                    <br>Duration</th>
+                <th>Average
+                    <br>Outgoing Call
+                    <br>Duration</th>
+                <th>Cumulative
+                    <br/>CallBack Delay</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="isLoading">
+                <tr>
+                    <td colspan="14">
+                        <div class="loader-container">
+                            <div class="item-1"></div>
+                            <div class="item-2"></div>
+                            <div class="item-3"></div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="!isLoading && detailedEmployeeList.length === 0">
+                <tr>
+                    <td colspan="14">
+                        No data found...
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="!isLoading">
+                <tr *ngFor="let emp of detailedEmployeeList">
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" style="text-align: left" (click)="goToDetail(emp)"><b>{{emp.name}}</b>
+                        <br>
+                        <span>{{emp?.username}}</span>
+                        <br>
+                        <div class="date">{{emp?.firstLogDate|date}}</div>
+                    </td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">
+                        <span class="badge" [ngClass]="{'badge2':emp.disabled === 1}">{{emp.disabled === 0 ? 'active' : 'deactivated'}}</span>
+                    </td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.incomingCalls?.count?.toString() || '...'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.outCalls?.count?.toString() || '...'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.missedCalls?.count?.toString() || '...'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.missedCallPercent | number : '1.2-2'}}<i *ngIf="emp?.missedCalls?.count">%</i></td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.incomingCalls?.sum| timestamp:'hh:mm:ss'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.outCalls?.sum | timestamp:'hh:mm:ss'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.newCalls|| '...'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.newCallsPercentage | number : '1.2-2'}}<i *ngIf="emp?.newCallsPercentage">%</i></td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.incomingCalls?.average | timestamp:'hh:mm:ss'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.outCalls?.average | timestamp:'hh:mm:ss'}}</td>
+                    <td class="pointer" [ngClass]="{'disabled':emp.disabled===1}" (click)="goToDetail(emp)">{{emp?.callbackdelay | timestamp:'hh:mm:ss'}}</td>
+                    <td>
+                        <div class="dropdown employee-action">
+                            <a *ngIf="emp.disabled===0" data-toggle="dropdown" class="pointer">
+                                <b>...</b>
+                            </a>
+                            <b *ngIf="emp.disabled===1" class="disabled">...</b>
+                            <ul class="dropdown-menu shadow">
+                                <li>Choose Actions
+                                    <span>
+                                        <i class="fa fa-times"></i>
+                                    </span>
+                                </li>
+                                <li (click)="goToDetail(emp)">View Details</li>
+                                <li (click)="showWorkTimeSettingDlg(template, emp)">Work Time</li>
+                                <li (click)="onDeactive(emp.id)">Deactivate</li>
+                                <li (click)="onDelete(emp.id)">Delete</li>
+                                <li (click)="onRename(templateRenameDlg, emp)">Change Name</li>
+                                <li (click)="onChangePwd(templatePwdDlg, emp)">Change Password</li>
+                                <li style="display: flex" (click)="onChangeRecording(emp)">
+                                    Recording&nbsp;&nbsp;<ui-switch size="small" [ngModel]="emp.recording_enabled"></ui-switch>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #template>
+    <!-- <div class="modal-header"> -->
+
+    <!-- </div> -->
+    <div class="modal-body">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <alert *ngIf="submitted"></alert>
+        <img src="../../assets/img/logo.png" class="mx-auto d-block" style="margin-top: 20px">
+        <h4 class="text-center"> Work Time</h4>
+        <form [formGroup]="workTimeForm" (ngSubmit)="onSubmit(workTimeForm.value)" name="workTimeForm">
+            <label for="username">Employee Name</label>
+            <input type="text" class="form-control" [value]="selectedEmp.username" disabled>
+            <input type="hidden" formControlName="empId" [(ngModel)]="selectedEmp.id">
+            <label>Start</label>
+            <input placeholder="start time"  [(ngModel)]="selectedEmp.start_work_time" class="form-control" type="time" formControlName="startWorkTime">
+
+            <label>End</label>
+            <input placeholder="End time" type="time" [(ngModel)]="selectedEmp.end_work_time" class="form-control" formControlName="endWorkTime">
+            
+            <div class="right">
+                <div class="btn-group">
+                    <button type="submit" class="btn  modal-create">OK</button>
+                    <button type="button" class="btn btn-primary modal-button" (click)="modalRef.hide()">Cancel</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+
+</ng-template>
+
+
+<ng-template #templateRenameDlg>
+        <!-- <div class="modal-header"> -->
+    
+        <!-- </div> -->
+        <div class="modal-body">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <alert *ngIf="nameSubmitted"></alert>
+            <h4 class="text-center"> Change Employee Name</h4>
+            <form [formGroup]="changeNameForm" (ngSubmit)="submitChangeName(changeNameForm.value)" name="changeNameForm">
+                <label for="username">New Name</label>
+                <input type="text" class="form-control" formControlName="name" [(ngModel)]="selectedEmp.name">
+                <div *ngIf="nameSubmitted && changeNameF.name.errors" class="invalid-feedback">
+                    <div *ngIf="changeNameF.name.errors.required">New Name is required</div>
+                </div>
+                <input type="hidden" formControlName="empId" [(ngModel)]="selectedEmp.id">
+                
+                <div class="right">
+                    <div class="btn-group">
+                        <button type="submit" class="btn  modal-create">OK</button>
+                        <button type="button" class="btn btn-primary modal-button" (click)="modalRef.hide()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+    
+    
+        </div>
+    
+    </ng-template>
+
+
+    <ng-template #templatePwdDlg>
+            <!-- <div class="modal-header"> -->
+        
+            <!-- </div> -->
+            <div class="modal-body">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <alert *ngIf="pwdSubmitted"></alert>
+                <h4 class="text-center"> Change Employee Password</h4>
+                <form [formGroup]="changePwdForm" (ngSubmit)="submitChangePwd()" name="changePwdForm">
+                    <label for="username">New Password</label>
+                    <input type="password" class="form-control" formControlName="password">
+                    <div *ngIf="pwdSubmitted && changePwdF.password.errors" class="invalid-feedback">
+                        <div *ngIf="changePwdF.password.errors.required">New password is required</div>
+                    </div>
+                    <input type="hidden" formControlName="empId" [(ngModel)]="selectedEmp.id">
+                    <label for="username">Confirm Password</label>
+                    <input type="password" class="form-control" formControlName="confirm_password">
+                    <div *ngIf="changePwdF.confirm_password.errors?.MutchPassword">Passwords not match</div>
+                    
+                    <div class="right">
+                        <div class="btn-group">
+                            <button type="submit" class="btn  modal-create">OK</button>
+                            <button type="button" class="btn btn-primary modal-button" (click)="modalRef.hide()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+        
+        
+            </div>
+        
+        </ng-template>
